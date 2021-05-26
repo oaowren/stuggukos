@@ -2,7 +2,7 @@ import React from "react";
 
 const Clock: React.FC = () => {
   const [time, setTime] = React.useState(
-    new Date().toLocaleTimeString(navigator.language, {
+    new Date().toLocaleTimeString("en-GB", {
       hour: "2-digit",
       minute: "2-digit",
     })
@@ -21,8 +21,15 @@ const Clock: React.FC = () => {
   }, []);
 
   return (
-    <div style={{ marginLeft: "-100px" }}>
-      <p style={{ fontWeight: 800 }}>{time}</p>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        marginTop: "-40px",
+        marginBottom: "-75px",
+      }}
+    >
+      <p style={{ fontSize: "3em", fontFamily: "Helvetica Neue" }}>{time}</p>
     </div>
   );
 };

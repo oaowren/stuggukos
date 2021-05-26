@@ -53,14 +53,22 @@ const RoomAdmin: React.FC = () => {
       <FirebaseDatabaseMutation type="set" path={`rooms/${id}`}>
         {({ runMutation }) => (
           <React.Fragment>
-            <h3>Opptatt?</h3>
+            <h3>Status:</h3>
+            <button
+              style={{ marginRight: "12px" }}
+              onClick={async () => {
+                await runMutation({ no: id, taken: 3 });
+              }}
+            >
+              Ikke hjemme
+            </button>
             <button
               style={{ marginRight: "12px" }}
               onClick={async () => {
                 await runMutation({ no: id, taken: 2 });
               }}
             >
-              Ja
+              Opptatt
             </button>
             <button
               style={{ marginRight: "12px" }}
@@ -75,7 +83,7 @@ const RoomAdmin: React.FC = () => {
                 await runMutation({ no: id, taken: 0 });
               }}
             >
-              Nei
+              Ledig
             </button>
           </React.Fragment>
         )}

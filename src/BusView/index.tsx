@@ -1,5 +1,4 @@
 import React from "react";
-import Clock from "../Clock";
 import * as styles from "./styles";
 
 interface IProps {
@@ -107,7 +106,6 @@ const BusView: React.FC<IProps> = props => {
         <div style={{ width: "25%", marginLeft: "24px" }}>
           <p>Stopp</p>
         </div>
-        <Clock />
       </div>
       {props.stopPlaces.map(sp =>
         filterRoutes(sp.estimatedCalls).map(ec => <BusSingular {...ec} />)

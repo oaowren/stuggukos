@@ -4,6 +4,7 @@ import { colorDict } from "../assets/colors";
 import { Link } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 import BusView from "../BusView";
+import Clock from "../Clock";
 
 const BUS_ROUTES = gql`
   query (
@@ -138,6 +139,7 @@ const Rooms: React.FC = () => {
   }
   return (
     <div>
+      <Clock />
       <FirebaseDatabaseNode path={"rooms"}>
         {d => {
           return (
