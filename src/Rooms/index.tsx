@@ -1,22 +1,26 @@
 import React from "react";
 import { FirebaseDatabaseNode } from "@react-firebase/database";
+import { colorDict } from "../assets/colors";
+import { Link } from "react-router-dom";
 
-interface DatabaseProps {
+interface IProps {
+  taken: 0 | 1 | 2;
   no: number;
-  taken: boolean;
 }
 
-const NumberMap: React.FC<DatabaseProps> = props => {
+const NumberMap: React.FC<IProps> = props => {
   return (
-    <h1
-      style={{
-        color: props.taken ? "red" : "green",
-        fontSize: "44px",
-        fontFamily: "helvetica",
-      }}
-    >
-      {props.no}
-    </h1>
+    <Link to={`/${props.no}`} style={{ textDecoration: "none" }}>
+      <h1
+        style={{
+          color: colorDict[props.taken],
+          fontSize: "44px",
+          fontFamily: "helvetica",
+        }}
+      >
+        {props.no}
+      </h1>
+    </Link>
   );
 };
 

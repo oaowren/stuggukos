@@ -3,34 +3,47 @@ import {
   FirebaseDatabaseNode,
 } from "@react-firebase/database";
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { colorDict } from "../assets/colors";
 
 interface IParams {
   id?: string | undefined;
 }
+
+interface IProps {
+  taken: 0 | 1 | 2;
+  no: number;
+}
+
+const RoomDiv: React.FC<IProps> = props => {
+  return (
+    <div>
+      <h1
+        style={{
+          color: colorDict[props.taken],
+          fontSize: "44px",
+          fontFamily: "helvetica",
+        }}
+      >
+        {props.no}
+      </h1>
+    </div>
+  );
+};
 
 const RoomAdmin: React.FC = () => {
   const { id } = useParams<IParams>();
 
   return (
     <React.Fragment>
+      <div>
+        <Link to="/">Tilbake</Link>
+      </div>
       <FirebaseDatabaseNode path={`rooms/${id}`}>
         {d => {
           return (
             <React.Fragment>
-              {!d.isLoading && d.value && (
-                <div>
-                  <h1
-                    style={{
-                      color: d.value.taken ? "red" : "green",
-                      fontSize: "44px",
-                      fontFamily: "helvetica",
-                    }}
-                  >
-                    {d.value.no}
-                  </h1>
-                </div>
-              )}
+              {!d.isLoading && d.value && <RoomDiv {...d.value} />}
             </React.Fragment>
           );
         }}
@@ -41,16 +54,21 @@ const RoomAdmin: React.FC = () => {
             <h3>Opptatt?</h3>
             <button
               onClick={async () => {
-                const returnVal = await runMutation({ no: id, taken: true });
-                console.log(returnVal);
+                await runMutation({ no: id, taken: 2 });
               }}
             >
               Ja
             </button>
             <button
               onClick={async () => {
-                const returnVal = await runMutation({ no: id, taken: false });
-                console.log(returnVal);
+                await runMutation({ no: id, taken: 1 });
+              }}
+            >
+              Kanskje
+            </button>
+            <button
+              onClick={async () => {
+                await runMutation({ no: id, taken: 0 });
               }}
             >
               Nei
