@@ -9,5 +9,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 p {
-  font-size: large;
+  font-size: 2.5em;
+}
+
+::-webkit-scrollbar {
+  width: 0;
 }

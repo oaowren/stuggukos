@@ -56,7 +56,7 @@ const BusSingular: React.FC<EstimatedCall> = props => {
       <div style={{ width: "10%", marginLeft: "24px" }}>
         <p>{props.serviceJourney.journeyPattern.line.publicCode}</p>
       </div>
-      <div style={{ width: "30%", marginLeft: "24px" }}>
+      <div style={{ width: "35%", marginLeft: "24px" }}>
         <p>{props.destinationDisplay.frontText}</p>
       </div>
       <div style={{ width: "15%", marginLeft: "36px" }}>
@@ -66,7 +66,7 @@ const BusSingular: React.FC<EstimatedCall> = props => {
           )}
         </p>
       </div>
-      <div style={{ width: "20%", marginLeft: "24px" }}>
+      <div style={{ width: "25%", marginLeft: "24px" }}>
         <p>{`Lerkendal ${props.quay.publicCode}`}</p>
       </div>
     </div>
@@ -80,13 +80,13 @@ const BusView: React.FC<IProps> = props => {
         <div style={{ width: "10%", marginLeft: "24px" }}>
           <p>Nr.</p>
         </div>
-        <div style={{ width: "30%", marginLeft: "24px" }}>
+        <div style={{ width: "35%", marginLeft: "24px" }}>
           <p>Rute</p>
         </div>
         <div style={{ width: "15%", marginLeft: "36px" }}>
           <p>Avgang</p>
         </div>
-        <div style={{ width: "20%", marginLeft: "24px" }}>
+        <div style={{ width: "25%", marginLeft: "24px" }}>
           <p>Stopp</p>
         </div>
       </div>
