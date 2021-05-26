@@ -11,7 +11,7 @@ const Clock: React.FC = () => {
   React.useEffect(() => {
     const interval = setInterval(() => {
       setTime(
-        new Date().toLocaleTimeString("no-nb", {
+        new Date().toLocaleTimeString("en-GB", {
           hour: "2-digit",
           minute: "2-digit",
         })
