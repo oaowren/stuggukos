@@ -106,7 +106,7 @@ const Rooms: React.FC = () => {
     variables: {
       ids: ["NSR:StopPlace:60257"],
       includeCancelledTrips: false,
-      limit: 40,
+      limit: 150,
       limitPerLine: 20,
       omitNonBoarding: true,
       start: date,

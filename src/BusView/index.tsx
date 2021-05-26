@@ -37,6 +37,13 @@ interface EstimatedCall {
     };
   };
 }
+const ALLOWED_ROUTES = ["1", "2", "10", "11", "13", "14", "24"];
+
+const filterRoutes = (routes: EstimatedCall[]) => {
+  return routes.filter(p =>
+    ALLOWED_ROUTES.includes(p.serviceJourney.journeyPattern.line.publicCode)
+  );
+};
 
 const validTime = (time: string) => {
   const date = new Date(time);
@@ -103,7 +110,7 @@ const BusView: React.FC<IProps> = props => {
         <Clock />
       </div>
       {props.stopPlaces.map(sp =>
-        sp.estimatedCalls.map(ec => <BusSingular {...ec} />)
+        filterRoutes(sp.estimatedCalls).map(ec => <BusSingular {...ec} />)
       )}
     </div>
   );
