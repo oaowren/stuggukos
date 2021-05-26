@@ -99,7 +99,7 @@ const NumberMap: React.FC<IProps> = props => {
 
 const date = new Date().toISOString();
 
-const MINUTE_MS = 30000;
+const MINUTE_MS = 15000;
 
 const Rooms: React.FC = () => {
   let { error, data, refetch, loading } = useQuery(BUS_ROUTES, {

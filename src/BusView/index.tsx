@@ -1,4 +1,5 @@
 import React from "react";
+import Clock from "../Clock";
 import * as styles from "./styles";
 
 interface IProps {
@@ -37,6 +38,13 @@ interface EstimatedCall {
   };
 }
 
+const validTime = (time: string) => {
+  const date = new Date(time);
+  const arrival = date.getTime();
+  const now = new Date().getTime();
+  return arrival > now;
+};
+
 const getTimeText = (time: string) => {
   const date = new Date(time);
   const arrival = date.getTime();
@@ -51,25 +59,28 @@ const getTimeText = (time: string) => {
 };
 
 const BusSingular: React.FC<EstimatedCall> = props => {
+  const arrival = props.realtime
+    ? props.expectedArrivalTime
+    : props.aimedArrivalTime;
   return (
-    <div className={styles.busRow}>
-      <div style={{ width: "10%", marginLeft: "24px" }}>
-        <p>{props.serviceJourney.journeyPattern.line.publicCode}</p>
-      </div>
-      <div style={{ width: "35%", marginLeft: "24px" }}>
-        <p>{props.destinationDisplay.frontText}</p>
-      </div>
-      <div style={{ width: "15%", marginLeft: "36px" }}>
-        <p>
-          {getTimeText(
-            props.realtime ? props.expectedArrivalTime : props.aimedArrivalTime
-          )}
-        </p>
-      </div>
-      <div style={{ width: "25%", marginLeft: "24px" }}>
-        <p>{`Lerkendal ${props.quay.publicCode}`}</p>
-      </div>
-    </div>
+    <React.Fragment>
+      {validTime(arrival) ? (
+        <div className={styles.busRow}>
+          <div style={{ width: "10%", marginLeft: "24px" }}>
+            <p>{props.serviceJourney.journeyPattern.line.publicCode}</p>
+          </div>
+          <div style={{ width: "35%", marginLeft: "24px" }}>
+            <p>{props.destinationDisplay.frontText}</p>
+          </div>
+          <div style={{ width: "15%", marginLeft: "36px" }}>
+            <p>{getTimeText(arrival)}</p>
+          </div>
+          <div style={{ width: "25%", marginLeft: "24px" }}>
+            <p>{`Lerkendal ${props.quay.publicCode}`}</p>
+          </div>
+        </div>
+      ) : null}
+    </React.Fragment>
   );
 };
 
@@ -89,6 +100,7 @@ const BusView: React.FC<IProps> = props => {
         <div style={{ width: "25%", marginLeft: "24px" }}>
           <p>Stopp</p>
         </div>
+        <Clock />
       </div>
       {props.stopPlaces.map(sp =>
         sp.estimatedCalls.map(ec => <BusSingular {...ec} />)
