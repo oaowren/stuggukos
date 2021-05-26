@@ -4,12 +4,19 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { FirebaseDatabaseProvider } from "@react-firebase/database";
 import firebase from "firebase";
-import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 import { ApolloProvider } from "@apollo/client/react";
 import "./index.css";
 
-const client = new ApolloClient({
+const link = createHttpLink({
   uri: "https://api.entur.io/journey-planner/v2/graphql",
+  headers: {
+    "ET-client-name": "Odd_Andre_Owren-departureboard",
+  },
+});
+
+const client = new ApolloClient({
+  link,
   cache: new InMemoryCache(),
 });
 
