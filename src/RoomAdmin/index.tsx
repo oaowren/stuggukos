@@ -37,7 +37,9 @@ const RoomAdmin: React.FC = () => {
   return (
     <React.Fragment>
       <div>
-        <Link to="/">Tilbake</Link>
+        <Link to="/" style={{ color: "#FFFFFF" }}>
+          Tilbake
+        </Link>
       </div>
       <FirebaseDatabaseNode path={`rooms/${id}`}>
         {d => {
@@ -53,6 +55,7 @@ const RoomAdmin: React.FC = () => {
           <React.Fragment>
             <h3>Opptatt?</h3>
             <button
+              style={{ marginRight: "12px" }}
               onClick={async () => {
                 await runMutation({ no: id, taken: 2 });
               }}
@@ -60,6 +63,7 @@ const RoomAdmin: React.FC = () => {
               Ja
             </button>
             <button
+              style={{ marginRight: "12px" }}
               onClick={async () => {
                 await runMutation({ no: id, taken: 1 });
               }}

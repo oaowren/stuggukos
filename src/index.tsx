@@ -4,6 +4,14 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { FirebaseDatabaseProvider } from "@react-firebase/database";
 import firebase from "firebase";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloProvider } from "@apollo/client/react";
+import "./index.css";
+
+const client = new ApolloClient({
+  uri: "https://api.entur.io/journey-planner/v2/graphql",
+  cache: new InMemoryCache(),
+});
 
 const firebaseConfig = {
   apiKey: "AIzaSyAJs3CfaIbuTDPt4ZpeKqU6v3vT_WV6iwI",
@@ -18,9 +26,11 @@ const firebaseConfig = {
 
 ReactDOM.render(
   <React.StrictMode>
-    <FirebaseDatabaseProvider firebase={firebase} {...firebaseConfig}>
-      <App />
-    </FirebaseDatabaseProvider>
+    <ApolloProvider client={client}>
+      <FirebaseDatabaseProvider firebase={firebase} {...firebaseConfig}>
+        <App />
+      </FirebaseDatabaseProvider>
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

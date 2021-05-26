@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.3.19",
+    "@apollo/react-hooks": "^4.0.0",
     "@react-firebase/database": "^0.3.11",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -12,7 +14,9 @@
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.5",
     "@types/react-router": "^5.1.14",
+    "apollo-boost": "^0.4.9",
     "firebase": "^8.6.2",
+    "graphql": "^15.5.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router": "^5.2.0",
