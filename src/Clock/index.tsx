@@ -29,7 +29,14 @@ const Clock: React.FC = () => {
         marginBottom: "-75px",
       }}
     >
-      <p style={{ fontSize: "3em", fontFamily: "Helvetica Neue" }}>{time}</p>
+      <p
+        style={{
+          fontSize: "3em",
+          fontFamily: "Roboto Mono",
+        }}
+      >
+        {time}
+      </p>
     </div>
   );
 };
