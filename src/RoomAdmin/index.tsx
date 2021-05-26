@@ -10,7 +10,6 @@ interface IParams {
 }
 
 const RoomAdmin: React.FC = () => {
-  const [checked, setChecked] = React.useState(false);
   const { id } = useParams<IParams>();
 
   return (
