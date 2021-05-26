@@ -11,7 +11,7 @@ import "./index.css";
 const link = createHttpLink({
   uri: "https://api.entur.io/journey-planner/v2/graphql",
   headers: {
-    "ET-client-name": "Odd_Andre_Owren-departureboard",
+    "ET-Client-Name": "Odd_Andre_Owren-departureboard",
   },
 });
 
