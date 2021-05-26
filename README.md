@@ -1,5 +1,5 @@
 # About
-This project is a simple React-application for use on a dedicated screen in the common area of apartment H101-106 of Klæbuveien 128. The purpose is to keep track of all bus-routes that are available from the Lerkendal-stops. 
+This project is a simple React-application for use on a dedicated screen in the common area of apartment H101-106 of Klæbuveien 128. The purpose is to keep track of all bus-routes that are available from the Lerkendal bus stops. 
 
 Besides this, the screen also showcases the status for each of the rooms in the apartment, following a traffic-light model (green = available, yellow = maybe, red = busy). This status can be updated from a dedicated link for each room. 
 
