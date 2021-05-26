@@ -6,4 +6,4 @@ Besides this, the screen also showcases the status for each of the rooms in the 
 The app is hosted through Firebase hosting, and is available at https://stuggukos.web.app/
 
 ## API 
-The bus routes are fetched from Entur's journey planner API, using GraphQL (https://api.entur.io/journey-planner/v2/graphql). Docs for this API is available at https://developer.entur.org/.
+The bus routes are fetched from Entur's journey planner API, using GraphQL (https://api.entur.io/journey-planner/v2/graphql). Docs for this API is available at https://developer.entur.org/pages-journeyplanner-journeyplanner-v2.
