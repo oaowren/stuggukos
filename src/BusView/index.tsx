@@ -36,7 +36,7 @@ interface EstimatedCall {
     };
   };
 }
-const ALLOWED_ROUTES = ["1", "2", "10", "11", "13", "14", "24"];
+const ALLOWED_ROUTES = ["1", "2", "10", "11", "13", "14", "20", "24"];
 
 const filterRoutes = (routes: EstimatedCall[]) => {
   return routes.filter(p =>
