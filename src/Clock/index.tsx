@@ -25,12 +25,11 @@ const Clock: React.FC = () => {
       style={{
         display: "flex",
         justifyContent: "center",
-        marginTop: "-40px",
-        marginBottom: "-75px",
       }}
     >
       <p
         style={{
+          margin: "10px auto",
           fontSize: "3em",
           fontFamily: "Roboto Mono",
         }}

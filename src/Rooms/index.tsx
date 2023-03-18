@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 import BusView from "../BusView";
 import Clock from "../Clock";
+import CountDown from "../CountDown";
 
 const BUS_ROUTES = gql`
   query (
@@ -140,6 +141,7 @@ const Rooms: React.FC = () => {
   return (
     <div>
       <Clock />
+      <CountDown />
       <FirebaseDatabaseNode path={"rooms"}>
         {d => {
           return (
