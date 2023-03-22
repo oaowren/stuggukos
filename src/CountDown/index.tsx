@@ -1,9 +1,8 @@
-import { intervalToDuration, isBefore } from "date-fns";
-import React, { useMemo } from "react";
+import { addMinutes, intervalToDuration, isBefore } from "date-fns";
+import React from "react";
+import Soviet from '../assets/soviet.png'
 
-const CountDown: React.FC = () => {
-  const importantDate = useMemo(() => new Date('2023-05-01T22:00Z'), []);
-
+const CountDown: React.FC<{importantDate: Date}> = ({importantDate}) => {
   const [time, setTime] = React.useState(
     intervalToDuration({
         start: new Date(),
@@ -24,7 +23,7 @@ const CountDown: React.FC = () => {
   }, [importantDate]);
 
   const countDownTimer = () => {
-    const days = (time.days || 0) + 30* (time.months || 0);
+    const days = (time.days || 0) + 31* (time.months || 0);
     const hours = time.hours || 0;
     const minutes = time.minutes || 0;
     const seconds = time.seconds || 0;
@@ -35,29 +34,36 @@ const CountDown: React.FC = () => {
     return `${dayString}${hourString}${minuteString}${secondString}`;
   }
 
-  const scale = 8;
+  const scale = 3;
 
   const getPx = () => {
     if (time.months && time.months > 0){
         return `${10+0*scale}px`;
     } else if (time.days && time.days >= 20){
-        return `${10+1*scale}px`;
+        return `${10+1*(scale + 1)}px`;
     } else if (time.days && time.days >= 10){
-        return `${10+2*scale}px`;
+        return `${10+2*(scale + 2)}px`;
     } else if (time.days && time.days >= 5){
-        return `${10+3*scale}px`;
+        return `${10+3*(scale + 3)}px`;
     } else if (time.days && time.days >= 3){
-        return `${10+4*scale}px`;
+        return `${10+4*(scale + 5)}px`;
     } else if (time.days && time.days >= 1){
-        return `${10+5*scale}px`;
+        return `${10+5*(scale + 8)}px`;
     } else {
-        return `${10+6*scale}px`;
+        return `${10+6*(scale + 13)}px`;
     }
   }
 
-  if (isBefore(importantDate, new Date())) {
+  if (isBefore(addMinutes(importantDate, 2), new Date())) {
     return null;
+  } 
+
+  if (isBefore(importantDate, new Date())){
+    return <div style={{position: "absolute", width: "100%", left: 0, top: 0}}>
+      <img style={{width: "100%", objectFit: "fill"}} src={Soviet} alt="Moro for unga"/>
+    </div>
   }
+
 
   return (
     <div

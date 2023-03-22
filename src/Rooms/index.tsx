@@ -7,6 +7,7 @@ import BusView from "../BusView";
 import Clock from "../Clock";
 import CountDown from "../CountDown";
 
+
 const BUS_ROUTES = gql`
   query (
     $ids: [String]!
@@ -101,6 +102,8 @@ const NumberMap: React.FC<IProps> = props => {
 
 const date = new Date().toISOString();
 
+const importantDate = new Date('2023-04-30T22:00Z');
+
 const MINUTE_MS = 15000;
 
 const Rooms: React.FC = () => {
@@ -141,7 +144,7 @@ const Rooms: React.FC = () => {
   return (
     <div>
       <Clock />
-      <CountDown />
+      <CountDown importantDate={importantDate}/>
       <FirebaseDatabaseNode path={"rooms"}>
         {d => {
           return (
