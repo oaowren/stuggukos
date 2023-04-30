@@ -52,7 +52,7 @@ const CountDown: React.FC<{importantDate: Date}> = ({importantDate}) => {
     } else if ((time.hours && time.hours > 0) || (time.minutes && time.minutes > 0)) {
         return `${10+6*(scale + 13)}px`;
     } else {
-        return `${10+7*(scale + 20)}px`;
+        return "256px";
     }
   }
 
@@ -74,6 +74,7 @@ const CountDown: React.FC<{importantDate: Date}> = ({importantDate}) => {
         justifyContent: "center",
       }}
     >
+    {((time.hours && time.hours === 2 )) ? <p style={{margin: "10px auto", fontSize: "192px", fontFamily: "Roboto Mono"}}>Andrew hour</p> :  
       <p
         style={{
           margin: "10px auto",
@@ -83,6 +84,7 @@ const CountDown: React.FC<{importantDate: Date}> = ({importantDate}) => {
       >
         {countDownTimer()}
       </p>
+    }
     </div>
   );
 };
