@@ -49,8 +49,10 @@ const CountDown: React.FC<{importantDate: Date}> = ({importantDate}) => {
         return `${10+4*(scale + 5)}px`;
     } else if (time.days && time.days >= 1){
         return `${10+5*(scale + 8)}px`;
-    } else {
+    } else if ((time.hours && time.hours > 0) || (time.minutes && time.minutes > 0)) {
         return `${10+6*(scale + 13)}px`;
+    } else {
+        return `${10+7*(scale + 20)}px`;
     }
   }
 
