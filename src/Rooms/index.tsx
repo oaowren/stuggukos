@@ -124,7 +124,7 @@ const Rooms: React.FC = () => {
   const [citybikeCapacity, setCitybikeCapacity] = React.useState(0);
 
   const getAndSetBikeCap = () => {
-    fetch("https://gbfs.urbansharing.com/trondheimbysykkel.no/station_information.json", {
+    fetch("https://gbfs.urbansharing.com/trondheimbysykkel.no/station_status.json", {
       headers: citybikeHeader,
       method: "GET"
     }).then(res => {
@@ -135,8 +135,12 @@ const Rooms: React.FC = () => {
         return null;
       }
     }).then(json => {
-      const cap = json.data.stations.filter((s: any) => s.station_id === "86")[0].capacity || -1
-      setCitybikeCapacity(cap);
+      const cap = json.data.stations.filter((s: any) => s.station_id === "86")[0].num_bikes_available
+      if (isNaN(cap)) {
+        setCitybikeCapacity(-1);
+      } else {
+        setCitybikeCapacity(cap)
+      }
     })
   }
 
