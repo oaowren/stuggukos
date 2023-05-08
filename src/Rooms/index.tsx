@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 import BusView from "../BusView";
 import Clock from "../Clock";
-import CountDown from "../CountDown";
-
+import CityBike from "../CityBike";
 
 const BUS_ROUTES = gql`
   query (
@@ -102,9 +101,12 @@ const NumberMap: React.FC<IProps> = props => {
 
 const date = new Date().toISOString();
 
-const importantDate = new Date('2023-04-30T22:00Z');
-
 const MINUTE_MS = 15000;
+
+const citybikeHeader = {
+  "Client-Identifier": "Odd_Andre_Owren-departureboard",
+  "Content-Type": "application/json",
+};
 
 const Rooms: React.FC = () => {
   let { error, data, refetch, loading } = useQuery(BUS_ROUTES, {
@@ -119,7 +121,27 @@ const Rooms: React.FC = () => {
     },
   });
 
+  const [citybikeCapacity, setCitybikeCapacity] = React.useState(0);
+
+  const getAndSetBikeCap = () => {
+    fetch("https://gbfs.urbansharing.com/trondheimbysykkel.no/station_information.json", {
+      headers: citybikeHeader,
+      method: "GET"
+    }).then(res => {
+      if (res.ok){
+        return res.json();
+      } else {
+        setCitybikeCapacity(-1);
+        return null;
+      }
+    }).then(json => {
+      const cap = json.data.stations.filter((s: any) => s.station_id === "86")[0].capacity || -1
+      setCitybikeCapacity(cap);
+    })
+  }
+
   React.useEffect(() => {
+    getAndSetBikeCap();
     const interval = setInterval(() => {
       const dateNew = new Date().toISOString();
       refetch({
@@ -131,6 +153,7 @@ const Rooms: React.FC = () => {
         start: dateNew,
         timeRange: 72000,
       });
+      getAndSetBikeCap();
     }, MINUTE_MS);
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -144,7 +167,6 @@ const Rooms: React.FC = () => {
   return (
     <div>
       <Clock />
-      <CountDown importantDate={importantDate}/>
       <FirebaseDatabaseNode path={"rooms"}>
         {d => {
           return (
@@ -166,6 +188,7 @@ const Rooms: React.FC = () => {
         }}
       </FirebaseDatabaseNode>
       <div>
+        <CityBike capacity={citybikeCapacity}/>
         <BusView {...data} />
       </div>
     </div>
