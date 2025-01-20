@@ -9,73 +9,46 @@ import CityBike from "../CityBike";
 
 const BUS_ROUTES = gql`
   query (
-    $ids: [String]!
-    $start: DateTime!
+    $id: String!
     $timeRange: Int!
     $limit: Int!
-    $limitPerLine: Int
-    $omitNonBoarding: Boolean!
-    $whiteListedLines: [String!]
-    $whiteListedAuthorities: [String!]
-    $whiteListedModes: [Mode]
-    $includeCancelledTrips: Boolean!
   ) {
-    stopPlaces(ids: $ids) {
-      id
-      estimatedCalls(
-        startTime: $start
-        timeRange: $timeRange
-        numberOfDepartures: $limit
-        numberOfDeparturesPerLineAndDestinationDisplay: $limitPerLine
-        omitNonBoarding: $omitNonBoarding
-        whiteListed: {
-          lines: $whiteListedLines
-          authorities: $whiteListedAuthorities
-        }
-        whiteListedModes: $whiteListedModes
-        includeCancelledTrips: $includeCancelledTrips
-      ) {
-        ...estimatedCallFields
-      }
-    }
-  }
-  fragment estimatedCallFields on EstimatedCall {
-    actualArrivalTime
-    actualDepartureTime
-    aimedArrivalTime
-    aimedDepartureTime
-    date
-    destinationDisplay {
-      frontText
-    }
-    expectedDepartureTime
-    expectedArrivalTime
-    predictionInaccurate
-    quay {
-      ...quayFields
-    }
-    realtime
-    serviceJourney {
-      ...serviceJourneyFields
-    }
-  }
-  fragment quayFields on Quay {
+  stopPlace(id: $id) {
     id
     name
-    description
-    publicCode
-  }
-  fragment lineFields on Line {
-    publicCode
-  }
-  fragment serviceJourneyFields on ServiceJourney {
-    id
-    journeyPattern {
-      line {
-        ...lineFields
+    estimatedCalls(timeRange: $timeRange, numberOfDepartures: $limit) {     
+      realtime
+      aimedArrivalTime
+      aimedDepartureTime
+      expectedArrivalTime
+      expectedDepartureTime
+      actualArrivalTime
+      actualDepartureTime
+      date
+      forBoarding
+      forAlighting
+      destinationDisplay {
+        frontText
+      }
+      quay {
+        id
+        name
+        description
+        publicCode
+      }
+      serviceJourney {
+        journeyPattern {
+          line {
+            id
+            publicCode
+            name
+            transportMode
+          }
+        }
       }
     }
   }
+}
 `;
 
 interface IProps {
@@ -111,7 +84,7 @@ const citybikeHeader = {
 const Rooms: React.FC = () => {
   let { error, data, refetch, loading } = useQuery(BUS_ROUTES, {
     variables: {
-      ids: ["NSR:StopPlace:60257"],
+      id: "NSR:StopPlace:60257",
       includeCancelledTrips: false,
       limit: 150,
       limitPerLine: 20,
@@ -149,7 +122,7 @@ const Rooms: React.FC = () => {
     const interval = setInterval(() => {
       const dateNew = new Date().toISOString();
       refetch({
-        ids: ["NSR:StopPlace:60257"],
+        id: "NSR:StopPlace:60257",
         includeCancelledTrips: false,
         limit: 40,
         limitPerLine: 20,

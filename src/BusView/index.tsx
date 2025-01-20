@@ -2,10 +2,10 @@ import React from "react";
 import * as styles from "./styles";
 
 interface IProps {
-  stopPlaces: {
+  stopPlace: {
     id: string;
     estimatedCalls: EstimatedCall[];
-  }[];
+  };
 }
 
 interface EstimatedCall {
@@ -107,9 +107,7 @@ const BusView: React.FC<IProps> = props => {
           <p>Stopp</p>
         </div>
       </div>
-      {props.stopPlaces.map(sp =>
-        filterRoutes(sp.estimatedCalls).map(ec => <BusSingular {...ec} />)
-      )}
+      {filterRoutes(props.stopPlace.estimatedCalls).map(ec => <BusSingular {...ec} />)}
     </div>
   );
 };

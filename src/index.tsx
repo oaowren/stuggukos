@@ -9,7 +9,7 @@ import { ApolloProvider } from "@apollo/client/react";
 import "./index.css";
 
 const link = createHttpLink({
-  uri: "https://api.entur.io/journey-planner/v2/graphql",
+  uri: "https://api.entur.io/journey-planner/v3/graphql",
   headers: {
     "ET-Client-Name": "Odd_Andre_Owren-departureboard",
   },
